@@ -3,12 +3,18 @@
 namespace FENGberd\MyFirstPlugin;//命名空间，和文件路径要一样
 
 //下面这几个use是插件必须要的
+use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\event\Listener;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 use RVIP\RVIP;
+use pocketmine\level\sound\PopSound;
+use pocketmine\level\sound\FizzSound;
+use pocketmine\Event;
+
+
 
 class Main extends PluginBase implements Listener
 {
@@ -26,37 +32,46 @@ class Main extends PluginBase implements Listener
 	{
 			$this->getServer()->getLogger()->info("§e进服显示插件关闭…感谢使用");
 	}
+	
 	public function onJ(PlayerJoinEvent $e)
 	{
 		foreach ($this->getServer()->getOnlinePlayers() as $pl) {
 	
 	$p=$e->getPlayer();
 
-	$n=$p->getName();
-
-		if($this->isVip($n)){
-
-		$lv=$this->vip->VIP("get",$p);
-
+	$ts = $this->vip->Day("get",$p->getName());
 		
-		if($lv==0){ 
-	$p->sendMessage("§d-------------------\n§e欢迎您加入幻星梦,当前状态很好哦~\n§6官网:www.funmc.cc,§b见熊§c举报§b带截图有丰富奖励呢~\n§d-------------------");
-		
-		$pl->sendTip("§b欢迎萌萌哒的§6".$n."§b进入游戏");
-		}
-		else if($lv==1){
-    
-	$this->getPlayer()->broadcastMessage("§d欢§e迎§cVIP§6玩§b家§a进§7入§e游§6戏!");
+	
+if($ts>0)
+{
+		$this->getServer()->broadcastMessage("§d欢§e迎§cVIP§6玩§b家§a进§7入§e游§6戏!");
 	
 		$pl->sendTip("§d==§6尊贵的§cVIP§6玩家§d==\n§b酷酷哒的§6".$n."§b进入游戏");
+		
+		                         $pl->getLevel()->addSound(new PopSound($p));
+
+	
+}
+	
+		if($p->isOp()){
+   
+   
+   	$p->sendMessage("§d-------------------\n§e欢迎您幻星梦高层管理员\n§b您是OP,请尽力帮助需要帮助的人\n§d-------------------");
+		
+		$pl->sendTip("§d====§6欢迎高层组的§6管理员§d====\n§b一个路边扫地的§6".$n."§b进入游戏\n§e====§6有问题可以找他哦~§e====");
+		 
 		}
+		else
+		{
+	
 
 		}
 	}
 	
 	 return;
 	}
-	 public function onQuir(PlayerQuitEvent $e)
+	
+	 public function onQ(PlayerQuitEvent $e)
 	 {
 	 
 	 	$p=$e->getPlayer();
