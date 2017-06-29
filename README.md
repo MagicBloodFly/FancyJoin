@@ -1,5 +1,5 @@
-<h3>FancyJoin</h3>
-<font color=#bule>极致插件，来自幻星梦高层组</font>
+<h2>FancyJoin</h2>
 
+极致插件，来自FancyDream Team 团队
 
 Magic雪飞版权制作
