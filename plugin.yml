@@ -1,19 +1,6 @@
-name: MyFirstPlugin
-main: FENGberd\MyFirstPlugin\Main
+name: FancyJoin
+main: FCJoin\Main
 version: 1.0.0
-api: [1.0.0]
+api: [3.0.0]
 load: POSTWORLD
-author: FENGberd
-commands:
- yoo:
-  description: "一个测试用的命令"
-  usage: "/yoo"
-  permission: MyFirstPlugin.command.yoo
-permissions:
- MyFirstPlugin.*:
-  default: op
-  description: "这代表只有OP有这个权限"
- MyFirstPlugin.command.yoo:
-  default: true
-  description: "这代表普通玩家也能使用这个指令"
-  
+author: "Magic雪飞"
